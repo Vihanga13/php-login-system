@@ -1,0 +1,7 @@
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore test files
+test.php
+test_db.php
