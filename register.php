@@ -121,6 +121,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <title>Sign Up - Create Your Account</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
@@ -128,8 +130,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Poppins', sans-serif;
+            background: #F4F6F8;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -138,260 +140,236 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }
         
         .container {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            background: #FFFFFF;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             overflow: hidden;
             width: 100%;
-            max-width: 450px;
-            animation: slideUp 0.8s ease-out;
+            max-width: 480px;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .container:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
         }
         
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
+            background: #1A73E8;
+            color: #FFFFFF;
+            padding: 32px;
             text-align: center;
             position: relative;
         }
         
-        .header::before {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 20px solid transparent;
-            border-right: 20px solid transparent;
-            border-top: 10px solid #667eea;
-        }
-        
         .header h2 {
             font-size: 28px;
-            margin-bottom: 10px;
-            font-weight: 300;
+            margin-bottom: 12px;
+            font-weight: 600;
         }
         
         .header p {
-            opacity: 0.9;
-            font-size: 14px;
+            font-size: 16px;
+            opacity: 0.95;
         }
         
         .form-container {
-            padding: 40px 30px 30px;
+            padding: 35px;
+            background: #FFFFFF;
         }
         
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 24px;
             position: relative;
         }
         
         .input-group {
             position: relative;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
         }
         
         .input-group i {
             position: absolute;
-            left: 15px;
+            left: 16px;
             top: 50%;
             transform: translateY(-50%);
-            color: #667eea;
-            font-size: 16px;
-            z-index: 1;
+            color: #1A73E8;
+            font-size: 18px;
+            z-index: 2;
+            transition: all 0.3s ease;
         }
         
         .form-control {
             width: 100%;
-            padding: 15px 15px 15px 45px;
-            border: 2px solid #e1e5e9;
-            border-radius: 10px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            background: #f8f9fa;
+            padding: 12px 16px 12px 48px;
+            border: 1px solid #D1D5DB;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.2s ease;
+            background: #FAFAFA;
+            color: #2E2E2E;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .form-control::placeholder {
+            color: #4B5563;
+            transition: all 0.2s ease;
         }
         
         .form-control:focus {
             outline: none;
-            border-color: #667eea;
-            background: white;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-        
-        .form-control.error {
-            border-color: #e74c3c;
-            background: #fdf2f2;
-        }
-        
-        .form-control.error:focus {
-            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+            border-color: #1A73E8;
+            background: #FFFFFF;
+            box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.12);
         }
         
         .error-message {
-            color: #e74c3c;
+            color: #DC2626;
             font-size: 13px;
-            margin-top: 8px;
+            margin-top: 6px;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            background: #FEF2F2;
+            border-left: 3px solid #DC2626;
         }
         
         .password-strength {
-            margin-top: 8px;
-            font-size: 12px;
+            margin-top: 12px;
+            font-size: 13px;
+            color: #4B5563;
         }
         
         .strength-bar {
-            height: 3px;
-            background: #e1e5e9;
+            height: 4px;
+            background: #E5E7EB;
             border-radius: 2px;
-            margin-top: 5px;
+            margin-top: 8px;
             overflow: hidden;
         }
         
         .strength-fill {
             height: 100%;
-            transition: all 0.3s ease;
+            transition: width 0.3s ease;
             border-radius: 2px;
         }
         
-        .strength-weak { background: #e74c3c; width: 33%; }
-        .strength-medium { background: #f39c12; width: 66%; }
-        .strength-strong { background: #27ae60; width: 100%; }
+        .strength-weak { 
+            background: #DC2626;
+            width: 33%;
+        }
+        
+        .strength-medium { 
+            background: #F59E0B;
+            width: 66%;
+        }
+        
+        .strength-strong { 
+            background: #10B981;
+            width: 100%;
+        }
         
         .btn-group {
             display: flex;
-            gap: 15px;
-            margin-top: 30px;
+            gap: 16px;
+            margin-top: 32px;
         }
         
         .btn {
             flex: 1;
-            padding: 15px;
+            padding: 12px 24px;
             border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 600;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            font-family: 'Poppins', sans-serif;
             cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            text-align: center;
         }
         
         .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: #1A73E8;
+            color: #FFFFFF;
         }
         
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+            background: #1669C1;
         }
         
         .btn-secondary {
-            background: #6c757d;
-            color: white;
+            background: #DC2626;
+            color: #FFFFFF;
         }
         
         .btn-secondary:hover {
-            background: #5a6268;
-            transform: translateY(-2px);
+            background: #B91C1C;
         }
         
         .login-link {
             text-align: center;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #e1e5e9;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid #E5E7EB;
+        }
+        
+        .login-link p {
+            color: #4B5563;
+            font-size: 15px;
+            margin-bottom: 8px;
         }
         
         .login-link a {
-            color: #667eea;
+            color: #1A73E8;
             text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.2s ease;
         }
         
         .login-link a:hover {
-            color: #764ba2;
-        }
-        
-        .floating-shapes {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-        
-        .shape {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        .shape:nth-child(1) { width: 80px; height: 80px; top: 20%; left: 10%; animation-delay: 0s; }
-        .shape:nth-child(2) { width: 60px; height: 60px; top: 60%; left: 80%; animation-delay: 2s; }
-        .shape:nth-child(3) { width: 40px; height: 40px; top: 80%; left: 20%; animation-delay: 4s; }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+            color: #1669C1;
         }
         
         @media (max-width: 480px) {
             .container {
                 margin: 10px;
-                border-radius: 15px;
+                border-radius: 12px;
             }
             
             .form-container {
-                padding: 30px 20px 20px;
+                padding: 24px;
             }
             
             .btn-group {
                 flex-direction: column;
             }
+            
+            .header h2 {
+                font-size: 24px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="floating-shapes">
-        <div class="shape"></div>
-        <div class="shape"></div>
-        <div class="shape"></div>
-    </div>
-    
     <div class="container">
         <div class="header">
-            <h2><i class="fas fa-user-plus"></i> Create Account</h2>
-            <p>Join us today and start your journey</p>
+            <h2>Create Your Account</h2>
+            <p>Join our community today</p>
         </div>
         
         <div class="form-container">
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" id="registrationForm">
                 <div class="form-group">
                     <div class="input-group">
+                        <input type="text" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" 
+                               value="<?php echo htmlspecialchars($username); ?>" placeholder="Enter your username">
                         <i class="fas fa-user"></i>
-                        <input type="text" name="username" class="form-control <?php echo (!empty($username_err)) ? 'error' : ''; ?>" 
-                               value="<?php echo $username; ?>" placeholder="Enter your username" required>
                     </div>
                     <?php if(!empty($username_err)): ?>
                         <div class="error-message">
@@ -403,9 +381,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 
                 <div class="form-group">
                     <div class="input-group">
+                        <input type="email" name="email" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" 
+                               value="<?php echo htmlspecialchars($email); ?>" placeholder="Enter your email address">
                         <i class="fas fa-envelope"></i>
-                        <input type="email" name="email" class="form-control <?php echo (!empty($email_err)) ? 'error' : ''; ?>" 
-                               value="<?php echo $email; ?>" placeholder="Enter your email" required>
                     </div>
                     <?php if(!empty($email_err)): ?>
                         <div class="error-message">
@@ -417,9 +395,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 
                 <div class="form-group">
                     <div class="input-group">
+                        <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" 
+                               placeholder="Create a strong password" id="password">
                         <i class="fas fa-lock"></i>
-                        <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'error' : ''; ?>" 
-                               value="<?php echo $password; ?>" placeholder="Create a password" id="password" required>
                     </div>
                     <?php if(!empty($password_err)): ?>
                         <div class="error-message">
@@ -437,9 +415,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 
                 <div class="form-group">
                     <div class="input-group">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" name="confirm_password" class="form-control <?php echo (!empty($confirm_password_err)) ? 'error' : ''; ?>" 
-                               value="<?php echo $confirm_password; ?>" placeholder="Confirm your password" required>
+                        <input type="password" name="confirm_password" class="form-control <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" 
+                               placeholder="Confirm your password" id="confirmPassword">
+                        <i class="fas fa-shield-alt"></i>
                     </div>
                     <?php if(!empty($confirm_password_err)): ?>
                         <div class="error-message">
@@ -451,22 +429,24 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 
                 <div class="btn-group">
                     <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-user-plus"></i> Sign Up
+                        <i class="fas fa-user-plus"></i> Create Account
                     </button>
                     <button type="reset" class="btn btn-secondary">
-                        <i class="fas fa-undo"></i> Reset
+                        <i class="fas fa-redo"></i> Reset
                     </button>
                 </div>
             </form>
             
             <div class="login-link">
-                Already have an account? <a href="login.php"><i class="fas fa-sign-in-alt"></i> Login here</a>
+                <p>Already have an account?</p>
+                <a href="login.php">
+                    <i class="fas fa-sign-in-alt"></i> Log In
+                </a>
             </div>
         </div>
     </div>
     
     <script>
-        // Password strength checker
         document.getElementById('password').addEventListener('input', function() {
             const password = this.value;
             const strengthDiv = document.getElementById('passwordStrength');
@@ -483,45 +463,35 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             let strength = 0;
             let text = '';
             
-            // Check password strength
             if (password.length >= 8) strength++;
+            if (password.length >= 12) strength++;
             if (password.match(/[a-z]/)) strength++;
             if (password.match(/[A-Z]/)) strength++;
             if (password.match(/[0-9]/)) strength++;
             if (password.match(/[^a-zA-Z0-9]/)) strength++;
             
-            // Update strength display
             strengthFill.className = 'strength-fill';
             if (strength <= 2) {
                 strengthFill.classList.add('strength-weak');
-                text = 'Weak';
-            } else if (strength <= 3) {
+                text = 'Weak - Add more characters';
+            } else if (strength <= 4) {
                 strengthFill.classList.add('strength-medium');
-                text = 'Medium';
+                text = 'Medium - Add special characters';
             } else {
                 strengthFill.classList.add('strength-strong');
-                text = 'Strong';
+                text = 'Strong - Perfect!';
             }
             
             strengthText.textContent = text;
         });
         
-        // Form animation
-        document.getElementById('registrationForm').addEventListener('submit', function(e) {
-            const submitBtn = this.querySelector('button[type="submit"]');
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
-            submitBtn.disabled = true;
-        });
-        
-        // Input focus effects
-        document.querySelectorAll('.form-control').forEach(input => {
-            input.addEventListener('focus', function() {
-                this.parentElement.style.transform = 'scale(1.02)';
-            });
-            
-            input.addEventListener('blur', function() {
-                this.parentElement.style.transform = 'scale(1)';
-            });
+        document.getElementById('confirmPassword').addEventListener('input', function() {
+            const password = document.getElementById('password').value;
+            if (this.value === password) {
+                this.style.borderColor = '#10B981';
+            } else {
+                this.style.borderColor = '#DC2626';
+            }
         });
     </script>
 </body>

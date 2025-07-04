@@ -14,70 +14,207 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 <head>
     <meta charset="UTF-8">
     <title>Welcome</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #F4F6F8;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             padding: 20px;
         }
+
         .wrapper {
             max-width: 600px;
-            margin: 0 auto;
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 100%;
+            background: #FFFFFF;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .wrapper:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        .header {
+            background: #1A73E8;
+            color: #FFFFFF;
+            padding: 32px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin: 0;
+            margin-bottom: 12px;
+            color: #FFFFFF;
+        }
+
+        .header p {
+            font-size: 16px;
+            opacity: 0.95;
+            margin: 0;
+        }
+
+        .content {
+            padding: 32px;
+        }
+
+        .welcome-message {
+            text-align: center;
+            color: #4B4B4B;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+
+        .user-info {
+            background: #FAFAFA;
+            border: 1px solid #D1D5DB;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 32px;
+        }
+
+        .user-info h3 {
+            color: #2E2E2E;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
             text-align: center;
         }
-        h1 {
-            color: #333;
-            margin-bottom: 20px;
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            padding: 12px;
+            background: #FFFFFF;
+            border-radius: 8px;
+            border: 1px solid #E5E7EB;
         }
-        .welcome-message {
+
+        .info-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-item i {
+            color: #1A73E8;
             font-size: 18px;
-            color: #666;
-            margin-bottom: 30px;
+            margin-right: 12px;
+            width: 24px;
+            text-align: center;
         }
-        .user-info {
-            background-color: #e9ecef;
-            padding: 20px;
-            border-radius: 5px;
-            margin-bottom: 20px;
+
+        .info-item strong {
+            color: #2E2E2E;
+            margin-right: 8px;
         }
+
+        .info-item span {
+            color: #4B4B4B;
+        }
+
+        .btn-container {
+            text-align: center;
+        }
+
         .logout-btn {
-            background-color: #dc3545;
-            color: white;
-            padding: 10px 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #1A73E8;
+            color: #FFFFFF;
+            padding: 12px 24px;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 15px;
+            font-weight: 500;
             text-decoration: none;
-            display: inline-block;
+            transition: all 0.2s ease;
         }
+
         .logout-btn:hover {
-            background-color: #c82333;
+            background: #1669C1;
+        }
+
+        .logout-btn i {
+            margin-right: 8px;
+        }
+
+        @media (max-width: 480px) {
+            .wrapper {
+                margin: 10px;
+                border-radius: 12px;
+            }
+
+            .content {
+                padding: 24px;
+            }
+
+            .header {
+                padding: 24px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .user-info {
+                padding: 16px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="wrapper">
-        <h1>Welcome, <?php echo htmlspecialchars($_SESSION["username"]); ?>!</h1>
-        
-        <div class="welcome-message">
-            <p>You have successfully logged into your account.</p>
+        <div class="header">
+            <h1>Welcome, <?php echo htmlspecialchars($_SESSION["username"]); ?>!</h1>
+            <p>You've successfully logged into your account</p>
         </div>
         
-        <div class="user-info">
-            <h3>Your Account Information</h3>
-            <p><strong>User ID:</strong> <?php echo $_SESSION["id"]; ?></p>
-            <p><strong>Username:</strong> <?php echo htmlspecialchars($_SESSION["username"]); ?></p>
+        <div class="content">
+            <div class="welcome-message">
+                <p>It's great to have you here! Your account is now active and ready to use.</p>
+            </div>
+            
+            <div class="user-info">
+                <h3>Account Information</h3>
+                <div class="info-item">
+                    <i class="fas fa-fingerprint"></i>
+                    <strong>User ID:</strong>
+                    <span><?php echo $_SESSION["id"]; ?></span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-user"></i>
+                    <strong>Username:</strong>
+                    <span><?php echo htmlspecialchars($_SESSION["username"]); ?></span>
+                </div>
+            </div>
+            
+            <div class="btn-container">
+                <a href="logout.php" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Sign Out
+                </a>
+            </div>
         </div>
-        
-        <p>
-            <a href="logout.php" class="logout-btn">Sign Out of Your Account</a>
-        </p>
     </div>
 </body>
 </html>

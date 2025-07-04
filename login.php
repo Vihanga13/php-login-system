@@ -92,116 +92,256 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Welcome Back</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        * {
             margin: 0;
-            padding: 20px;
-        }
-        .wrapper {
-            max-width: 400px;
-            margin: 0 auto;
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        h2 {
-            text-align: center;
-            color: #333;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #555;
-        }
-        input[type="text"], input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
+            padding: 0;
             box-sizing: border-box;
         }
-        input.error {
-            border-color: #dc3545;
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #F4F6F8;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
         }
-        .error-message {
-            color: #dc3545;
-            font-size: 14px;
-            margin-top: 5px;
-        }
-        .login-error {
-            background-color: #f8d7da;
-            color: #721c24;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            border: 1px solid #f5c6cb;
-        }
-        button {
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
+        
+        .container {
+            background: #FFFFFF;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
             width: 100%;
+            max-width: 480px;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        button:hover {
-            background-color: #0056b3;
+        
+        .container:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
         }
-        p {
+        
+        .header {
+            background: #1A73E8;
+            color: #FFFFFF;
+            padding: 32px;
             text-align: center;
-            margin-top: 20px;
+            position: relative;
         }
-        a {
-            color: #007bff;
+        
+        .header h2 {
+            font-size: 28px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .header p {
+            font-size: 16px;
+            opacity: 0.95;
+        }
+        
+        .form-container {
+            padding: 35px;
+            background: #FFFFFF;
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+            position: relative;
+        }
+        
+        .input-group {
+            position: relative;
+            margin-bottom: 8px;
+        }
+        
+        .input-group i {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #1A73E8;
+            font-size: 18px;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 16px 12px 48px;
+            border: 1px solid #D1D5DB;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.2s ease;
+            background: #FAFAFA;
+            color: #2E2E2E;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .form-control::placeholder {
+            color: #4B5563;
+            transition: all 0.2s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #1A73E8;
+            background: #FFFFFF;
+            box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.12);
+        }
+        
+        .alert {
+            padding: 16px;
+            margin-bottom: 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            background: #FEF2F2;
+            color: #DC2626;
+            border: 1px solid rgba(220, 38, 38, 0.1);
+        }
+        
+        .alert i {
+            margin-right: 12px;
+            font-size: 16px;
+        }
+        
+        .invalid-feedback {
+            color: #DC2626;
+            font-size: 13px;
+            margin-top: 6px;
+            display: block;
+            padding-left: 12px;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+            background: #1A73E8;
+            color: #FFFFFF;
+            margin-top: 32px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn:hover {
+            background: #1669C1;
+        }
+        
+        .btn i {
+            margin-right: 8px;
+        }
+        
+        .register-link {
+            text-align: center;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid #E5E7EB;
+            color: #4B5563;
+        }
+        
+        .register-link a {
+            display: inline-flex;
+            align-items: center;
+            color: #1A73E8;
             text-decoration: none;
+            font-weight: 500;
+            margin-top: 8px;
+            transition: color 0.2s ease;
         }
-        a:hover {
-            text-decoration: underline;
+        
+        .register-link a:hover {
+            color: #1669C1;
+        }
+        
+        .register-link a i {
+            margin-right: 8px;
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                margin: 10px;
+                border-radius: 12px;
+            }
+            
+            .form-container {
+                padding: 24px;
+            }
+            
+            .header {
+                padding: 24px;
+            }
+            
+            .header h2 {
+                font-size: 24px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="wrapper">
-        <h2>Login</h2>
-        <p>Please fill in your credentials to login.</p>
+    <div class="container">
+        <div class="header">
+            <h2>Welcome Back</h2>
+            <p>Sign in to your account</p>
+        </div>
+        
+        <div class="form-container">
+            <?php
+            if(!empty($login_err)){
+                echo '<div class="alert"><i class="fas fa-exclamation-circle"></i>' . $login_err . '</div>';
+            }
+            ?>
 
-        <?php 
-        if(!empty($login_err)){
-            echo '<div class="login-error">' . $login_err . '</div>';
-        }        
-        ?>
-
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <div class="form-group">
-                <label>Username</label>
-                <input type="text" name="username" class="<?php echo (!empty($username_err)) ? 'error' : ''; ?>" value="<?php echo $username; ?>">
-                <?php if(!empty($username_err)): ?>
-                    <div class="error-message"><?php echo $username_err; ?></div>
-                <?php endif; ?>
-            </div>    
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" name="password" class="<?php echo (!empty($password_err)) ? 'error' : ''; ?>">
-                <?php if(!empty($password_err)): ?>
-                    <div class="error-message"><?php echo $password_err; ?></div>
-                <?php endif; ?>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>" placeholder="Username">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <span class="invalid-feedback"><?php echo $username_err; ?></span>
+                </div>    
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" placeholder="Password">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <span class="invalid-feedback"><?php echo $password_err; ?></span>
+                </div>
+                <button type="submit" class="btn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Sign In
+                </button>
+            </form>
+            
+            <div class="register-link">
+                <p>Don't have an account?</p>
+                <a href="register.php">
+                    <i class="fas fa-user-plus"></i>
+                    Create an Account
+                </a>
             </div>
-            <div class="form-group">
-                <button type="submit">Login</button>
-            </div>
-            <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
-        </form>
+        </div>
     </div>
 </body>
 </html>
